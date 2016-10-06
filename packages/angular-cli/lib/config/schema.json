@@ -50,7 +50,7 @@
           "prefix": {
             "type": "string"
           },
-          "mobile": {
+          "serviceWorker": {
             "type": "boolean"
           },
           "styles": {

@@ -8,8 +8,8 @@ import {
   getWebpackCommonConfig,
   getWebpackDevConfigPartial,
   getWebpackProdConfigPartial,
-  getWebpackMobileConfigPartial,
-  getWebpackMobileProdConfigPartial
+  getWebpackSWConfigPartial,
+  getWebpackSWProdConfigPartial
 } from './';
 
 export class NgCliWebpackConfig {
@@ -41,13 +41,14 @@ export class NgCliWebpackConfig {
       ? getWebpackAotConfigPartial(this.ngCliProject.root, appConfig)
       : getWebpackNonAotConfigPartial(this.ngCliProject.root, appConfig);
 
-    if (appConfig.mobile) {
-      let mobileConfigPartial = getWebpackMobileConfigPartial(this.ngCliProject.root, appConfig);
-      let mobileProdConfigPartial = getWebpackMobileProdConfigPartial(this.ngCliProject.root,
+    if (appConfig.serviceWorker) {
+    
+      let swConfigPartial = getWebpackSWConfigPartial(this.ngCliProject.root, appConfig);
+      let swProdConfigPartial = getWebpackSWProdConfigPartial(this.ngCliProject.root,
                                                                       appConfig);
-      baseConfig = webpackMerge(baseConfig, mobileConfigPartial);
+      baseConfig = webpackMerge(baseConfig, swConfigPartial);
       if (this.target == 'production') {
-        targetConfigPartial = webpackMerge(targetConfigPartial, mobileProdConfigPartial);
+        targetConfigPartial = webpackMerge(targetConfigPartial, swProdConfigPartial);
       }
     }
 

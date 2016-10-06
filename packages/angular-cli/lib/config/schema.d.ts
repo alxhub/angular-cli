@@ -18,7 +18,7 @@ export interface CliConfig {
         test?: string;
         tsconfig?: string;
         prefix?: string;
-        mobile?: boolean;
+        serviceWorker?: boolean;
         /**
          * Global styles to be included in the build.
          */
