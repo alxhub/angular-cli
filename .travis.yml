@@ -14,7 +14,6 @@ env:
     - SCRIPT=test
     - NODE_SCRIPT=tests/e2e_runner.js
     - NODE_SCRIPT="tests/e2e_runner.js --nightly"
-#    - TARGET=mobile SCRIPT=mobile_test
 matrix:
   fast_finish: true
   allow_failures:
@@ -56,7 +55,6 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export CHROME_BIN=chromium-browser; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo "--no-sandbox" > ~/.config/chromium-flags.conf; fi
-  - if [[ "$TARGET" == "mobile" ]]; then export MOBILE_TEST=true; fi
   - npm install -g npm
   - npm config set spin false
   - npm config set progress false

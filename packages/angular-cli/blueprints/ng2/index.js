@@ -10,17 +10,10 @@ module.exports = {
     { name: 'source-dir', type: String, default: 'src', aliases: ['sd'] },
     { name: 'prefix', type: String, default: 'app', aliases: ['p'] },
     { name: 'style', type: String, default: 'css' },
-    { name: 'mobile', type: Boolean, default: false },
     { name: 'routing', type: Boolean, default: false },
     { name: 'inline-style', type: Boolean, default: false, aliases: ['is'] },
     { name: 'inline-template', type: Boolean, default: false, aliases: ['it'] }
   ],
-
-  afterInstall: function (options) {
-    if (options.mobile) {
-      return Blueprint.load(path.join(__dirname, '../mobile')).install(options);
-    }
-  },
 
   locals: function(options) {
     this.styleExt = options.style;
@@ -32,12 +25,6 @@ module.exports = {
       .replace(/-(.)/g, (_, l) => ' ' + l.toUpperCase())
       .replace(/^./, (l) => l.toUpperCase());
 
-    // For mobile projects, force inline styles and templates.
-    if (options.mobile) {
-      options.inlineStyle = true;
-      options.inlineTemplate = true;
-    }
-
     return {
       htmlComponentName: stringUtils.dasherize(options.entity.name),
       jsComponentName: stringUtils.classify(options.entity.name),
@@ -47,7 +34,6 @@ module.exports = {
       prefix: options.prefix,
       styleExt: this.styleExt,
       relativeRootPath: relativeRootPath,
-      isMobile: options.mobile,
       routing: options.routing,
       inlineStyle: options.inlineStyle,
       inlineTemplate: options.inlineTemplate

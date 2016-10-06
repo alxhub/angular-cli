@@ -45,11 +45,11 @@ describe('Acceptance: ng init', function () {
     return tmp.teardown('./tmp');
   });
 
-  function confirmBlueprinted(isMobile, routing) {
+  function confirmBlueprinted(routing) {
     routing = !!routing;
     var blueprintPath = path.join(root,  'blueprints', 'ng2', 'files');
     var mobileBlueprintPath = path.join(root, 'blueprints', 'mobile', 'files');
-    var expected = unique(walkSync(blueprintPath).concat(isMobile ? walkSync(mobileBlueprintPath) : []).sort());
+    var expected = unique(walkSync(blueprintPath).sort());
     var actual = walkSync('.').sort();
 
     forEach(Blueprint.renamedFiles, function (destFile, srcFile) {
@@ -61,11 +61,6 @@ describe('Acceptance: ng init', function () {
       expected[index] = expected[index].replace(/__styleext__/g, 'css');
       expected[index] = expected[index].replace(/__path__/g, 'src');
     });
-
-    if (isMobile) {
-      expected = expected.filter(p => p.indexOf('app.component.html') < 0);
-      expected = expected.filter(p => p.indexOf('app.component.css') < 0);
-    }
 
     if (!routing) {
       expected = expected.filter(p => p.indexOf('app-routing.module.ts') < 0);
@@ -115,15 +110,6 @@ describe('Acceptance: ng init', function () {
       '--skip-npm',
       '--skip-bower'
     ]).then(confirmBlueprinted);
-  });
-
-  it('ng init --mobile', () => {
-    return ng([
-      'init',
-      '--skip-npm',
-      '--skip-bower',
-      '--mobile'
-    ]).then(() => confirmBlueprinted(true));
   });
 
   it('ng init can run in created folder', function () {

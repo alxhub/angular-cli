@@ -1,3 +1,3 @@
-// this file is used in ../models/webpack-build-mobile.ts to add 
-// service worker functionality to mobile projects
-require('offline-plugin/runtime').install();
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register('/worker-basic.min.js');
+}

@@ -7,14 +7,9 @@ import {
 } from '../../../utils/fs';
 import {ng} from '../../../utils/process';
 import {stripIndents} from 'common-tags';
-import {isMobileTest} from '../../../utils/utils';
 
 
 export default function() {
-  if (isMobileTest()) {
-    return;
-  }
-
   return writeMultipleFiles({
       'src/app/app.component.scss': stripIndents`
         @import "app.component.partial";

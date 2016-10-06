@@ -6,15 +6,9 @@ import {
   replaceInFile
 } from '../../../utils/fs';
 import {ng} from '../../../utils/process';
-import {stripIndents} from 'common-tags';
-import {isMobileTest} from '../../../utils/utils';
-
+import {stripIndents} from 'common-tags'; 
 
 export default function() {
-  if (isMobileTest()) {
-    return;
-  }
-
   return writeMultipleFiles({
       'src/app/app.component.less': stripIndents`
         .outer {

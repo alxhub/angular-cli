@@ -23,6 +23,9 @@ export const getWebpackSWConfigPartial = function (projectRoot: string, appConfi
 export const getWebpackSWProdConfigPartial = function (projectRoot: string, appConfig: any) {
   const appRoot = path.resolve(projectRoot, appConfig.root);
   return {
+    entry: {
+      'sw-install': path.resolve(__dirname, '../utilities/sw-install.js')
+    }
     plugins: [
       new CopyWebpackPlugin([
         {from: workerScript},
