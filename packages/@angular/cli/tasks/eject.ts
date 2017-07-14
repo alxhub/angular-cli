@@ -436,7 +436,7 @@ export default Task.extend({
     if (project.root === path.resolve(outputPath)) {
       throw new SilentError ('Output path MUST not be project root directory!');
     }
-    if (appConfig.platform && appConfig.platform === 'server') {
+    if (appConfig.platform === 'server') {
       throw new SilentError('ng eject for platform server applications is coming soon!');
     }
 

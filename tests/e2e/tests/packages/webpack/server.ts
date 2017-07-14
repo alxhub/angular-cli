@@ -24,6 +24,8 @@ export default function(skipCleaning: () => void) {
       '--config', 'webpack.commonjs.config.js'))
     .then(() => expectFileToMatch('dist/app.main.js',
       /__webpack_exports__, "AppModuleNgFactory"/))
+    .then(() => expectFileToMatch('dist/app.main.js',
+      /var LAZY_MODULE_MAP = { ".\/lazy\.module#LazyModule": /))
     .then(() => exec(normalize('node'), 'index.js'))
     .then(() => expectFileToMatch('dist/index.html',
       new RegExp('<a ng-reflect-router-link="lazy" href="/lazy">lazy</a>')))
